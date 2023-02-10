@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use App\Repositories\Contracts\{{ class }} as {{ class }}Contract;
+
+final class {{ class }} extends BaseRepository implements {{ class }}Contract
+{
+
+}
