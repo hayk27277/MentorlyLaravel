@@ -20,6 +20,11 @@ return new class () extends Migration {
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->foreignId('user_role_id')->default(2)->constrained();
+            $table->foreignId('major_id')->nullable()->constrained();
+            $table->string('education');
+            $table->text('experience');
+            $table->text('aims_description');
+            $table->text('about');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

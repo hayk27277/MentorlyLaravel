@@ -27,6 +27,12 @@ class RegisterUserRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'sometimes|required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
+            'user_role_id' => 'required|exists:user_roles,id',
+            'user_field_id' => 'required|exists:user_fields,id',
+            'aims_description' => 'required|string',
+            'education' => 'required|string',
+            'experience' => 'required|string',
+            'about' => 'required|string',
             'password' => 'required|string|min:6',
         ];
     }

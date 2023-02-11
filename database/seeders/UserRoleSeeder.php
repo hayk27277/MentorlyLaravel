@@ -20,7 +20,7 @@ final class UserRoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->userRole->insert([
+        $this->userRole->query()->insert([
             [
                 'slug' => 'mentor',
                 'name' => 'Mentor',
