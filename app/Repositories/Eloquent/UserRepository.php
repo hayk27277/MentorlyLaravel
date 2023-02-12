@@ -20,7 +20,7 @@ class UserRepository extends BaseRepository implements UserRepositoryContract
 
     public function getPaginatedUsers(): Paginator
     {
-        return $this->model->query()->simplePaginate(20);
+        return $this->model->query()->with(['major', 'role'])->simplePaginate(20);
     }
 
     public function getPaginatedUsersWhere(array $conditions): Paginator
@@ -39,6 +39,6 @@ class UserRepository extends BaseRepository implements UserRepositoryContract
 
         $perPage = $conditions['per_page'] ?? 20;
 
-        return $this->model->simplePaginate($perPage);
+        return $this->model->with(['major', 'role'])->simplePaginate($perPage);
     }
 }
