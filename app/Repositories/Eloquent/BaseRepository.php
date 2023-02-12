@@ -21,6 +21,7 @@ abstract class BaseRepository implements BaseRepositoryContract
     {
         return $this->model->find($id);
     }
+
     public function findOrFail(int $id): mixed
     {
         return $this->model->findOrFail($id);

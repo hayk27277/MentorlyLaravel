@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -28,12 +30,13 @@ class RegisterUserRequest extends FormRequest
             'last_name' => 'sometimes|required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'user_role_id' => 'required|exists:user_roles,id',
-            'user_field_id' => 'required|exists:user_fields,id',
+            'major_id' => 'required|exists:majors,id',
             'aims_description' => 'required|string',
             'education' => 'required|string',
             'experience' => 'required|string',
             'about' => 'required|string',
             'password' => 'required|string|min:6',
+            'password_confirmation' => 'required|string|same:password',
         ];
     }
 }

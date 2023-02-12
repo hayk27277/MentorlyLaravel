@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class ModelMakeCommand extends \Illuminate\Foundation\Console\ModelMakeCommand
 {
-
-
-    public function handle()
+    public function handle(): void
     {
         if ($this->option('repo')) {
             $this->createRepository();
@@ -30,7 +27,7 @@ class ModelMakeCommand extends \Illuminate\Foundation\Console\ModelMakeCommand
      *
      * @return void
      */
-    protected function createService()
+    protected function createService(): void
     {
         $service = Str::studly(class_basename($this->argument('name')));
 
@@ -38,12 +35,13 @@ class ModelMakeCommand extends \Illuminate\Foundation\Console\ModelMakeCommand
             'name' => "{$service}Service",
         ]);
     }
+
     /**
      * Create a policy file for the model.
      *
      * @return void
      */
-    protected function createRepository()
+    protected function createRepository(): void
     {
         $service = Str::studly(class_basename($this->argument('name')));
 
@@ -59,5 +57,4 @@ class ModelMakeCommand extends \Illuminate\Foundation\Console\ModelMakeCommand
             ['service', null, InputOption::VALUE_NONE, 'Create a new service for the model'],
         ]);
     }
-
 }

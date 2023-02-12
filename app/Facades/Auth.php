@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Facades;
+
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth as SupportAuth;
 

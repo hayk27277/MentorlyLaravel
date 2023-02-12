@@ -7,7 +7,6 @@ namespace App\Console\Commands;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Input\InputOption;
 
 #[AsCommand(name: 'make:service')]
 class ServiceMakeCommand extends GeneratorCommand
@@ -44,33 +43,28 @@ class ServiceMakeCommand extends GeneratorCommand
      */
     public function handle()
     {
-        if (parent::handle() === false && ! $this->option('force')) {
+        if (false === parent::handle() && !$this->option('force')) {
             return false;
         }
+
         return 0;
     }
 
-
     /**
      * Get the stub file for the generator.
-     *
-     * @return string
      */
     protected function getStub(): string
     {
-
         return $this->resolveStubPath('/stubs/service.stub');
     }
 
     /**
      * Resolve the fully-qualified path to the stub.
      *
-     * @param  string  $stub
-     * @return string
+     * @param string $stub
      */
     protected function resolveStubPath($stub): string
     {
-
         return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
             ? $customPath
             : __DIR__.$stub;
@@ -79,12 +73,12 @@ class ServiceMakeCommand extends GeneratorCommand
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param string $rootNamespace
+     *
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
         return is_dir(app_path('Service')) ? $rootNamespace.'\\Service' : $rootNamespace;
     }
-
 }

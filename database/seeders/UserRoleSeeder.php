@@ -11,12 +11,11 @@ final class UserRoleSeeder extends Seeder
 {
     public function __construct(
         private UserRole $userRole
-    ) {}
+    ) {
+    }
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
@@ -24,17 +23,12 @@ final class UserRoleSeeder extends Seeder
             [
                 'slug' => 'mentor',
                 'name' => 'Mentor',
-                'description' => 'Creates content to share knowledge in his domain.'
+                'description' => 'Creates content to share knowledge in his domain.',
             ],
             [
                 'slug' => 'mentee',
                 'name' => 'Mentee',
-                'description' => 'Watch and learn from content created by mentors.'
-            ],
-            [
-                'slug' => 'admin',
-                'name' => 'Admin',
-                'description' => 'Manages sites settings and content.'
+                'description' => 'Watch and learn from content created by mentors.',
             ],
         ]);
     }

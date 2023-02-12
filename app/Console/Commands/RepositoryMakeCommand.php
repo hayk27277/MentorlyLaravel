@@ -4,15 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Events\Customer\SubscriptionHandled;
-use App\Models\Customer;
-use App\Models\PartnerPlan;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Input\InputOption;
 
 #[AsCommand(name: 'make:repo')]
 class RepositoryMakeCommand extends GeneratorCommand
@@ -51,13 +45,12 @@ class RepositoryMakeCommand extends GeneratorCommand
     {
         $this->call('make:repository-interface', ['name' => $this->getNameInput()]);
 
-        if (parent::handle() === false && !$this->option('force')) {
+        if (false === parent::handle() && !$this->option('force')) {
             return false;
         }
 
         return 0;
     }
-
 
     /**
      * Get the stub file for the generator.
@@ -73,24 +66,25 @@ class RepositoryMakeCommand extends GeneratorCommand
      * Resolve the fully-qualified path to the stub.
      *
      * @param string $stub
+     *
      * @return string
      */
     protected function resolveStubPath($stub)
     {
-
         return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
             ? $customPath
-            : __DIR__ . $stub;
+            : __DIR__.$stub;
     }
 
     /**
      * Get the default namespace for the class.
      *
      * @param string $rootNamespace
+     *
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return is_dir(app_path('Repositories')) ? $rootNamespace . '\\Repositories\Eloquent' : $rootNamespace;
+        return is_dir(app_path('Repositories')) ? $rootNamespace.'\\Repositories\Eloquent' : $rootNamespace;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Facades\Auth;
@@ -15,7 +17,8 @@ class UserAuthController extends Controller
 {
     public function __construct(
         private UserRepository $userRepository
-    ) {}
+    ) {
+    }
 
     public function login(LoginUserRequest $request): SuccessResource|ErrorResource
     {
@@ -33,9 +36,8 @@ class UserAuthController extends Controller
 
         return SuccessResource::make([
             'token' => $token,
-            'user' => $user
+            'user' => $user,
         ]);
-
     }
 
     public function register(RegisterUserRequest $request): SuccessResource

@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\MajorController;
 use App\Http\Controllers\Api\UserAuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UserFilterController;
+use App\Http\Controllers\Api\UserProfileController;
+use App\Http\Controllers\Api\UserRoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,18 +21,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::controller(UserAuthController::class)->group(function () {
+Route::controller(UserAuthController::class)->group(function (): void {
     Route::post('login', 'login');
     Route::post('register', 'register');
 
-    Route::middleware('auth:api')->group(function () {
+    Route::middleware('auth:api')->group(function (): void {
         Route::post('logout', 'logout');
         Route::post('refresh', 'refresh');
     });
 });
 
+Route::middleware('auth:api')->group(function (): void {
+    Route::controller(UserProfileController::class)->prefix('user')->group(function (): void {
+        Route::get('', 'index');
+        Route::put('', 'update');
+    });
 
-Route::middleware('auth:api')->group(function (){
-    Route::get('/user', fn (Request $request) => $request->user());
+    Route::get('users/filter', UserFilterController::class);
+    Route::apiResource('users', UserController::class);
+    Route::get('majors', MajorController::class);
+    Route::get('user-roles', UserRoleController::class);
 });

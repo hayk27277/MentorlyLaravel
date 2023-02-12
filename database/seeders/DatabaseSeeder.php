@@ -13,12 +13,11 @@ class DatabaseSeeder extends Seeder
     public function __construct(
         private UserRoleSeeder $userRoleSeeder,
         private MajorSeeder $majorSeeder
-    ) {}
+    ) {
+    }
 
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
     public function run(): void
     {

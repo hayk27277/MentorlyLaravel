@@ -7,7 +7,6 @@ namespace App\Console\Commands;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Input\InputOption;
 
 #[AsCommand(name: 'make:repository-interface')]
 class RepositoryInterfaceMakeCommand extends GeneratorCommand
@@ -44,13 +43,12 @@ class RepositoryInterfaceMakeCommand extends GeneratorCommand
      */
     public function handle()
     {
-        if (parent::handle() === false && !$this->option('force')) {
+        if (false === parent::handle() && !$this->option('force')) {
             return false;
         }
 
         return 0;
     }
-
 
     /**
      * Get the stub file for the generator.
@@ -66,24 +64,25 @@ class RepositoryInterfaceMakeCommand extends GeneratorCommand
      * Resolve the fully-qualified path to the stub.
      *
      * @param string $stub
+     *
      * @return string
      */
     protected function resolveStubPath($stub)
     {
-
         return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
             ? $customPath
-            : __DIR__ . $stub;
+            : __DIR__.$stub;
     }
 
     /**
      * Get the default namespace for the class.
      *
      * @param string $rootNamespace
+     *
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return is_dir(app_path('Repositories')) ? $rootNamespace . '\\Repositories\\Contracts' : $rootNamespace;
+        return is_dir(app_path('Repositories')) ? $rootNamespace.'\\Repositories\\Contracts' : $rootNamespace;
     }
 }
