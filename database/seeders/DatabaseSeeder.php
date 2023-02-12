@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->userRoleSeeder->run();
         $this->majorSeeder->run();
-        User::factory(10)->create();
+        User::factory(50)->create();
     }
 }

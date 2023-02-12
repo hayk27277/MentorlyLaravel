@@ -38,7 +38,8 @@ Route::middleware('auth:api')->group(function (): void {
     });
 
     Route::get('users/filter', UserFilterController::class);
-    Route::apiResource('users', UserController::class);
+    Route::get('users', [UserController::class, 'index']);
+    Route::get('users/{user_id}', [UserController::class, 'show']);
     Route::get('majors', MajorController::class);
     Route::get('user-roles', UserRoleController::class);
 });
